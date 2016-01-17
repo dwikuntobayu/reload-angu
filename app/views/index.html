@@ -16,11 +16,12 @@
     </section>
     <hr />
     <section  ng-controller="ctrl_user" data-ng-init="quantity=8; price=21">
+      <h3>implement controller & will change expense background color if name give color name</h3>
       <p>Name : <input type="text" ng-model="full_name" /></p>
       <p>Age : <input type="text" ng-model="age" /></p>
       <p>Name : {{ full_name }}</p>
       <p>Age : {{ age }}</p>
-      <p>Total Expense : $<span ng-bind="quantity * price"></span></p>
+      <p style="background-color: {{ full_name }}">Total Expense : $<span ng-bind="quantity * price"></span></p>
     </section>
     <hr />
     <section ng-controller="ctrl_scores">
@@ -33,7 +34,52 @@
       </div>
     </section>
     <hr />
-    <section  helloearth></section>
+    <section ng-controller="process_evl">
+      <button ng-click="to_gladius()">Gladius</button>
+      <button ng-click="to_golem()">Golem</button>
+      <p>The {{ name }}</p>
+    </section>
+    <hr />
+    <section ng-controller="process_bind">
+      <input ng-model="base" type="text" />
+      <button ng-click="combine_with(base)">Your Wish</button>
+      <button ng-click="combine_with('pika')">Electric</button>
+      <p>Mons is {{ name }}</p>
+    </section>
+    <hr />
+    <style>
+      section.set-border section {
+        padding: 5px;
+        border: solid 1px grey;
+      }
+    </style>
+    <section class="set-border">
+      <section ng-controller="parent_controller" >
+        <p>Now is {{ time_of_day }} with temperature {{ temperature }}</p>
+        <section ng-controller="child_controller" >
+          <p>Now is {{ time_of_day }} with temperature {{ temperature }}</p>
+          <section ng-controller="grandchild_controller" >
+            <p>Now is {{ time_of_day }} with temperature {{ temperature }}</p>
+          </section>
+        </section>
+      </section>
+    </section>
+    <h3>Custom Directives</h3>
+    <!--
+        element 'restrict' , this will give rule for implement of directive
+        Directive can call in multiple way :
+        case 1 :
+          if name directive = "mDwikuntobayu"
+          in view = <m-dwikuntobayu /> or <m:dwikuntobayu /> or <p mDwikuntobayu></p>
+        case 2 :
+          if name directive = "mdwikuntobayu"
+          in view = <mdwikuntobayu /> or <p mdwikuntobayu></p>
+        -->
+    <section helloearth></section>
+    <section ng-controller="human">
+      <div mdwikuntobayu></div>
+    </section>
+    <p changecolor></p>
     <!-- custom js is put in under to make sure all component is loaded -->
     <script src="../controllers/module_app.js"></script>
   </body>
