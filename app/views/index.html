@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Angular Reload</title>
+    <script src="../../src/js/angular_1.4.8.min.js" type="text/javascript"></script>
+  </head>
+  <!-- ng-app , is used for load custom module (implement angular code) -->
+  <!-- ng-app needed if will use ng-controller -->
+  <body ng-app="module_app">
+    <!-- ng-init & data-ng-init , is used for initialize default value to specific model (different is data-ng-init will make html valid) -->
+    <section data-ng-init="name='M Dwikunto'">
+      <p>Name : <input type="text" ng-model="name" /></p>
+      <p>Name from ng-bind : <span ng-bind="name"></span></p>
+      <!-- http://stackoverflow.com/questions/16125872/angularjs-why-ng-bind-is-better-than-in-angular -->
+      <p>Name from {{}} : {{ name }}</p>
+    </section>
+    <hr />
+    <section  ng-controller="ctrl_user" data-ng-init="quantity=8; price=21">
+      <p>Name : <input type="text" ng-model="full_name" /></p>
+      <p>Age : <input type="text" ng-model="age" /></p>
+      <p>Name : {{ full_name }}</p>
+      <p>Age : {{ age }}</p>
+      <p>Total Expense : $<span ng-bind="quantity * price"></span></p>
+    </section>
+    <hr />
+    <section ng-controller="ctrl_scores">
+      <h3>Basket ball scores</h3>
+      <!-- get score manually by index -->
+      <p>Match 1 : <span ng-bind="scores[0]"></span></p>
+      <!-- ng-repeat, use for looping array -->
+      <div ng-repeat="score in scores track by $index">
+        <p>Match <span ng-bind="$index + 2"></span> : <span ng-bind="scores[$index + 1]"></span></p>
+      </div>
+    </section>
+    <hr />
+    <section  helloearth></section>
+    <!-- custom js is put in under to make sure all component is loaded -->
+    <script src="../controllers/module_app.js"></script>
+  </body>
+</html>
