@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Angular Reload</title>
+    <link href="../../src/css/index.css" type="text/css" />
+    <script src="../../src/js/angular_1.4.8.min.js" type="text/javascript"></script>
+  </head>
+  <!-- ng-app , is used for load custom module (implement angular code) -->
+  <!-- ng-app needed if will use ng-controller -->
+  <body ng-app="module_form">
+    <section ng-controller="process_form">
+      <form novalidate class="css-form">
+        Name : <input type="text" ng-model="user.name" required /> <br />
+        Age : <input type="number" ng-model="user.age" required /><br />
+        Gender : 
+        <input type="radio" ng-model="user.gender" value="male" />Male
+        <input type="radio" ng-model="user.gender" value="female" />Female <br />
+        <input type="button" ng-click="save_data(user)" value="Save Data" /> &nbsp;
+        <input type="button" ng-click="retrive_data()" value="Retrive Data" />
+      </form>
+      Result Json <br />
+      Current : <br />
+      <pre>{{ user | json }}</pre><br />
+      Saved : <br />
+      <pre>{{ saved | json }}</pre>
+    </section>
+    <style type="text/css">
+      .css-form input.ng-invalid.ng-touched {
+        background-color: #FA787E;
+      }
+      .css-form input.ng-valid.ng-touched {
+        background-color: #78FA89;
+      }
+    </style>
+    <hr />
+    <h3>Custom Trigger  Model processing</h3>
+    <section >
+      <form>
+        <!-- will trigger after blur -->
+        Bactery Name : <input type="text" ng-model="bactery.name" ng-model-options="{ updateOn: 'blur' }" /><br />
+        <!-- will trigger after delay several milisecond -->
+        Bactery Type : <input type="text" ng-model="bactery.type" ng-model-options="{ debounce: 750 }" /><br />
+      </form>
+      <pre>(when blur) Bactery : {{ bactery.name }}</pre>
+      <pre>(debounce) Bactery : {{ bactery.type }}</pre>
+    </section>
+    <hr />
+    <h3>Custom Validation</h3>
+    <section >
+      <form name="form" novalidate >
+        Vir Name: <input type="text" ng-model="vir.name" name="name" validname required/><br />
+        <p ng-show="form.name.$error.validname">Name only allow character, dot and space</p>
+        <p ng-show="form.name.$error.required">Name required</p>
+        
+        Vir Email : <input type="text" ng-model="vir.email" name="email" validemail required/><br />
+        <p ng-show="form.email.$error.validemail">Email not valid format</p>
+        <p ng-show="form.email.$error.required">Email required</p>
+        
+        Vir Url : <input type="text" ng-model="vir.url" name="url" validurl required/><br />
+        <p ng-show="form.url.$error.validurl">Url not valid format</p>
+        <p ng-show="form.url.$error.required">Url required</p>
+        
+        Vir Age : <input type="text" ng-model="vir.age" name="age" min="17" max="70" validage required/>Year<br />
+        <p ng-show="form.age.$error.validage">Only allow decimal positif</p>
+        <p ng-show="form.age.$error.required">Age Required</p>
+        <p ng-show="form.age.$error.min || form.age.$error.max">Minimum 17 years and Maximum 70 year</p>
+      </form>
+
+      <h3>Result :</h3>
+      <pre>{{ vir.name }}</pre>
+      <pre>{{ vir.email }}</pre>
+      <pre>{{ vir.url }}</pre>
+      <pre>{{ vir.age }}</pre>
+    </section>
+    <hr />
+    
+    <!-- custom js is put in under to make sure all component is loaded -->
+    <script src="../controllers/module_form.js"></script>
+  </body>
+</html>

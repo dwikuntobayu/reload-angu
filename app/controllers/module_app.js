@@ -6,6 +6,7 @@ var app = angular.module('module_app', []);
 // =========
 // https://docs.angularjs.org/guide/controller
 // controller for hold a data user
+//http://stackoverflow.com/questions/11605917/this-vs-scope-in-angularjs-controllers
 app.controller('ctrl_user', function($scope) {
   $scope.full_name = "M Dwikuntobayu";
   $scope.age = "26";
@@ -43,6 +44,7 @@ app.controller('child_controller', function($scope) {
 app.controller('grandchild_controller', function($scope) {
   $scope.temperature = '35C';
 });
+
 
 // ===========
 // // Implement of Directive
