@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Angular Reload</title>
-    <link href="../../src/css/index.css" type="text/css" />
+    <link href="../../src/css/index.css" rel="stylesheet" />
     <script src="../../src/js/angular_1.4.8.min.js" type="text/javascript"></script>
   </head>
   <!-- ng-app , is used for load custom module (implement angular code) -->
@@ -49,20 +49,20 @@
     <section >
       <form name="form" novalidate >
         Vir Name: <input type="text" ng-model="vir.name" name="name" validname required/><br />
-        <p ng-show="form.name.$error.validname">Name only allow character, dot and space</p>
-        <p ng-show="form.name.$error.required">Name required</p>
+        <p ng-show="form.name.$error.validname" class="error">Name only allow character, dot and space</p>
+        <p ng-show="form.name.$error.required" class="error">Name required</p>
         
         Vir Email : <input type="text" ng-model="vir.email" name="email" validemail required/><br />
-        <p ng-show="form.email.$error.validemail">Email not valid format</p>
-        <p ng-show="form.email.$error.required">Email required</p>
+        <p ng-show="form.email.$error.validemail" class="error">Email not valid format</p>
+        <p ng-show="form.email.$error.required" class="error">Email required</p>
         
         Vir Url : <input type="text" ng-model="vir.url" name="url" validurl required/><br />
-        <p ng-show="form.url.$error.validurl">Url not valid format</p>
-        <p ng-show="form.url.$error.required">Url required</p>
+        <p ng-show="form.url.$error.validurl" class="error">Url not valid format</p>
+        <p ng-show="form.url.$error.required" class="error">Url required</p>
         
         Vir Age : <input type="text" ng-model="vir.age" name="age" min="17" max="70" validage required/>Year<br />
-        <p ng-show="form.age.$error.validage">Only allow decimal positif</p>
-        <p ng-show="form.age.$error.required">Age Required</p>
+        <p ng-show="form.age.$error.validage" class="error">Only allow decimal positif</p>
+        <p ng-show="form.age.$error.required" class="error">Age Required</p>
         <p ng-show="form.age.$error.min || form.age.$error.max">Minimum 17 years and Maximum 70 year</p>
       </form>
 
@@ -73,7 +73,20 @@
       <pre>{{ vir.age }}</pre>
     </section>
     <hr />
-    
+    <section>
+      <!--
+        Name Model cannot separate with dash or strip
+        and in angular make sure not give name separated 
+      -->
+      <form name="checkstatus" ng-init="compoemail='dwikunto@mail.com'">
+        Email : <input type="email" name="myemail" ng-model="compoemail" />
+        <h3>Status</h3>
+        Valid : {{ checkstatus.myemail.$valid }} <br />
+        Dirty : {{ checkstatus.myemail.$dirty }} <br />
+        Touched : {{ checkstatus.myemail.$touched }} <br />
+        Error : {{ checkstatus.myemail.$error }} <br />
+      </form>
+    </section>
     <!-- custom js is put in under to make sure all component is loaded -->
     <script src="../controllers/module_form.js"></script>
   </body>

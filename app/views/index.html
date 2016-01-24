@@ -64,6 +64,23 @@
         </section>
       </section>
     </section>
+    <hr />
+    <section ng-controller="json_array">
+      <ul>
+        <li ng-repeat="user in users | orderBy: 'first' ">
+          {{ user.first + " " + user.last }}
+        </li>
+      </ul>
+    </section>
+    <hr />
+    <h3>Filter</h3>
+    <p ng-init="money='13000000' ">Money : {{money | currency}}</p>
+    <p ng-init="arrnames=['jono', 'jini', 'daek', 'yuu', 'kelq'] ">
+      Filter :
+      <input type="text" ng-model="findname" /> <br />
+      <span ng-repeat="arrname in arrnames | filter : findname">{{ arrname }} &nbsp;</span>
+    </p>
+    <hr />
     <h3>Custom Directives</h3>
     <!--
         element 'restrict' , this will give rule for implement of directive
@@ -80,6 +97,29 @@
       <div mdwikuntobayu></div>
     </section>
     <p changecolor></p>
+    <hr />
+    <section ng-controller="control_ext" >
+      <div loadexternal></div>
+    </section>
+    <hr />
+    <section ng-controller="control_ext" >
+      <div loadynamic type="title"></div>
+      <div loadynamic type="content"></div>
+    </section>
+    <hr />
+    <section ng-controller="multi_controll_one">
+      <loadmulticontrol></loadmulticontrol>
+    </section>
+    <section ng-controller="multi_controll_two">
+      <loadmulticontrol></loadmulticontrol>
+    </section>
+    <hr />
+    <section ng-controller="multi_scope">
+      <separatescope info="customer"></separatescope>
+      <br />
+      <separatescope info="distributor"></separatescope>
+    </section>
+    <hr />
     <!-- custom js is put in under to make sure all component is loaded -->
     <script src="../controllers/module_app.js"></script>
   </body>
