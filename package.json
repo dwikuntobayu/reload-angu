@@ -1,0 +1,13 @@
+{
+  "name" : "angular-app",
+  "version" : "1.0.0",
+  "descirption" : "Run angular app in Node",
+  "main" : "server.js",
+  "author" : "M Dwikuntobayu",
+  "dependencies" : {
+    "express" : "~4.13.4",
+    "morgan" : "~1.6.1",
+    "body-parser" : "~1.14.2",
+    "debug" : "~2.2.0"
+  }
+}
