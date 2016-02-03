@@ -1,8 +1,24 @@
 var app = angular.module('module_crudapi', ['ngResource']);
 
+// // this for handle global error message
+// // the problem is when error happend this method not catch directly
+// // so the error was happen then this message will be called
+// app.config(function($provide, $httpProvider) {
+// $provide.factory('ErrorInterceptor', function($q) {
+// return {
+// responseError : function(rejection) {
+// console.log(rejection);
+// return $q.reject(rejection);
+// }
+// };
+// });
+//
+// $httpProvider.interceptors.push('ErrorInterceptor');
+// });
+
 //create services for access api with resource
 app.factory('Bycycle', function($resource) {
-  //error server "\xA4" ASCII-8BIT to UTF-8
+  //auth error server "\xA4" ASCII-8BIT to UTF-8
   //fails convert from ascii to utf
   //use window.btoa() , this method will Creates a base-64 encoded ASCII string from a "string" of binary data
   //because in api server only know this encode (if send via header)
@@ -84,27 +100,51 @@ app.factory('Bycycle', function($resource) {
 });
 
 var app_bycycle = angular.module('bycycle_module', ['module_crudapi']);
-
 app_bycycle.controller('bycycle_controller', function($scope, Bycycle) {
+  $scope.bycycle = {};
+  $scope.save_bycycle = function() {
+    $scope.bycycles = Bycycle.save({
+      name : $scope.bycycle.name,
+      series : $scope.bycycle.series
+    });
+  };
+  $scope.list_bycycles = function() {
+    $scope.bycycles = Bycycle.index();
+  };
+  $scope.show_bycycle = function() {
+    $scope.bycycles = Bycycle.show({
+      id : $scope.bycycle.id
+    });
+  };
+  $scope.update_bycycle = function() {
+    $scope.bycycles = Bycycle.update({
+      id : $scope.bycycle.id,
+      name : $scope.bycycle.name,
+      series : $scope.bycycle.series
+    });
+  };
+  $scope.delete_bycycle = function() {
+    if($scope.bycycle.id == null) {
+      $scope.bycycle.id = 0;
+    }
+    $scope.bycycles = Bycycle.destroy({
+      id : $scope.bycycle.id
+    });
+    // // this will catch error
+    // // but error will happend first then this handle will called
+    //.$promise.then(function(data) {
+    // // success handler
+    // }, function(error) {
+    // // error handler
+    // console.log(error);
+    // });
+  };
   // $scope.bycycles = Bycycle.save({name: "Recon 1", series: "xc-rc1"});
-  $scope.bycycles = Bycycle.index();
+  // $scope.bycycles = Bycycle.index();
   // $scope.bycycles = Bycycle.show({id: 1});
   // $scope.bycycles = Bycycle.update({id: 1, name: "Recon 2", series: "xc-rc2"});
   // $scope.bycycles = Bycycle.destroy({id: 1});
 });
-
-// app_bycycle.directive('showbycycle', function() {
-  // return {
-    // template: 'Name : {{ bycycles.bycyle.name }} <br /> Series : {{ bycycles.bycycle.series }}'
-  // };
-// });
-
-//
-// app.controller('myCtrl', function($scope, $http) {
-// $http.get("http://localhost:3003/").then(function(response) {
-// $scope.myWelcome = response.data;
-// });
-// });
 
 // angular.module('bycyclesExample', []).controller(function($scope, $http) {
 // $http.get('http://localhost:3003/api/v1/bycycles').success(function(data) {

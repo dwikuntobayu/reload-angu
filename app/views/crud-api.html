@@ -11,6 +11,21 @@
   <body >
     <div ng-app="bycycle_module">
       <div ng-controller="bycycle_controller">
+        <div>
+          <ul>
+            <li><span ng-click="list_bycycles()">List Bycycles</span></li>
+            <li><span ng-click="show_bycycle()">Show Bycycle</span> <input name="id" placeholder="Id Bycycle" ng-model="bycycle.id" /></li>
+            <li>
+              <span ng-click="save_bycycle()">Create Bycycle : </span>
+              <input name="name" placeholder="Name" ng-model="bycycle.name" /> &nbsp; <input name="series" placeholder="Series" ng-model="bycycle.series" />
+            </li>
+            <li>
+              <span ng-click="update_bycycle()">Update Bycycles</span><input name="id" placeholder="Id Bycycle" ng-model="bycycle.id" /> <br />
+              <input name="name" placeholder="Name"  ng-model="bycycle.name" /> &nbsp; <input name="series" placeholder="Series" ng-model="bycycle.series" />
+            </li>
+            <li><span ng-click="delete_bycycle()">Delete Bycycle</span> <input name="id" placeholder="Id Bycycle" ng-model="bycycle.id" /></li>
+          </ul>
+        </div>
         <div>{{ bycycles.message }}</div>
         <div>Name : {{ bycycles.bycycles.name }} &nbsp; Series : {{ bycycles.bycycles.series }}</div>
         <table>
