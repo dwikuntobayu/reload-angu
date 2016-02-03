@@ -10,11 +10,24 @@
   <!-- ng-app needed if will use ng-controller -->
   <body >
     <div ng-app="bycycle_module">
-      <ul ng-controller="bycycle_controller">
-        <li ng-repeat="bycycle in bycycles.bycycles">
-          {{ bycycle.name }}
-        </li>
-      </ul>
+      <table ng-controller="bycycle_controller">
+        <thead>
+          <tr>
+            <th width="50px">ID</th>
+            <th width="150px">Name</th>
+            <th width="150px">Series</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center;">
+          <!-- <tr ng-repeat="bycycle in bycycles.bycycles">
+            <td>{{ bycycle.id }}</td>
+            <td>{{ bycycle.name }}</td>
+            <td>{{ bycycle.series }}</td>
+          </tr> -->
+        </tbody>
+
+        <p showbycycle></p>
+      </table>
     </div>
     <script src="../controllers/module_crudapi.js"></script>
   </body>
