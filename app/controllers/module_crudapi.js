@@ -89,15 +89,15 @@ app_bycycle.controller('bycycle_controller', function($scope, Bycycle) {
   // $scope.bycycles = Bycycle.save({name: "Recon 1", series: "xc-rc1"});
   $scope.bycycles = Bycycle.index();
   // $scope.bycycles = Bycycle.show({id: 1});
-  // $scope.bycycles = Bycycle.update({id: 9, name: "Recon 2", series: "xc-rc2"});
-  // $scope.bycycle = Bycycle.destroy({id: 9});
+  // $scope.bycycles = Bycycle.update({id: 1, name: "Recon 2", series: "xc-rc2"});
+  // $scope.bycycles = Bycycle.destroy({id: 1});
 });
 
-app_bycycle.directive('showbycycle', function() {
-  return {
-    template: 'Name : {{ bycycles.bycyle.name }} <br /> Series : {{ bycycles.bycycle.series }}'
-  };
-});
+// app_bycycle.directive('showbycycle', function() {
+  // return {
+    // template: 'Name : {{ bycycles.bycyle.name }} <br /> Series : {{ bycycles.bycycle.series }}'
+  // };
+// });
 
 //
 // app.controller('myCtrl', function($scope, $http) {
