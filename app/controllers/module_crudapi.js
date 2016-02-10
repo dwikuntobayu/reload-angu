@@ -151,29 +151,74 @@ http_module.controller('httpBycycle', function($scope, $http) {
   var auth = window.btoa("dwikuntobayu" + ':' + "12345678");
   var base_url = 'http://localhost:3003';
   $scope.bycycle = {};
-  $scope.index = function() {
-    $http.get('http://localhost:3003/api/v1/bycycles').success(function(data) {
-      $scope.bycycles = data;
-    });
-  };
-  $scope.show = function() {
-    $http.get('http://localhost:3003/api/v1/bycycles/' + $scope.bycycle.id).success(function(data) {
-      $scope.bycycles = data;
-    });
-  };
+
+  function httpRequest(methodType, subDomain, inputData) {
+    return {
+    method: methodType,
+    url: 'http://localhost:3003/' + subDomain,
+      headers: {
+        'Authorization' : 'Basic ' + auth,
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'
+       },
+       data: inputData
+    };
+  }
+
   $scope.save = function() {
-    $http.post('http://localhost:3003/api/v1/bycycles', $scope.bycycle).success(function(data) {
-      $scope.bycycles = data;
-    });
+    $http(httpRequest('POST', 'api/v1/bycycles', $scope.bycycle)).then(
+      function (resSuccess){
+        $scope.bycycles = resSuccess.data;
+      },
+      function (resError){
+        console.log(resError);
+      }
+    );
   };
+
+  $scope.index = function() {
+    $http(httpRequest('GET', 'api/v1/bycycles')).then(
+      function (resSuccess){
+        $scope.bycycles = resSuccess.data;
+      },
+      function (resError){
+        console.log(resError);
+      }
+    );
+  };
+
+  $scope.show = function() {
+    $http(httpRequest('GET', 'api/v1/bycycles/' + $scope.bycycle.id)).then(
+      function (resSuccess){
+        $scope.bycycles = resSuccess.data;
+      },
+      function (resError){
+        console.log(resError);
+      }
+    );
+  };
+
   $scope.update = function() {
-    $http.put('http://localhost:3003/api/v1/bycycles/' + $scope.bycycle.id, $scope.bycycle).success(function(data) {
-      $scope.bycycles = data;
-    });
+    $http(httpRequest('PUT', 'api/v1/bycycles/' + $scope.bycycle.id, $scope.bycycle)).then(
+      function (resSuccess){
+        $scope.bycycles = resSuccess.data;
+      },
+      function (resError){
+        console.log(resError);
+      }
+    );
   };
+
   $scope.delete = function() {
-    $http.delete('http://localhost:3003/api/v1/bycycles/' + $scope.bycycle.id).success(function(data) {
-      $scope.bycycles = data;
-    });
+    $http(httpRequest('DELETE', 'api/v1/bycycles/' + $scope.bycycle.id)).then(
+      function (resSuccess){
+        $scope.bycycles = resSuccess.data;
+      },
+      function (resError){
+        console.log(resError);
+      }
+    );
   };
+
 }); 
