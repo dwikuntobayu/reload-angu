@@ -16,6 +16,10 @@ var app = angular.module('module_crudapi', ['ngResource']);
 // $httpProvider.interceptors.push('ErrorInterceptor');
 // });
 
+////==========================================
+//// Access API data with resources library
+//// create service with factory then inject to controller
+////==========================================
 //create services for access api with resource
 app.factory('Bycycle', function($resource) {
   //auth error server "\xA4" ASCII-8BIT to UTF-8
@@ -23,52 +27,12 @@ app.factory('Bycycle', function($resource) {
   //use window.btoa() , this method will Creates a base-64 encoded ASCII string from a "string" of binary data
   //because in api server only know this encode (if send via header)
   var auth = window.btoa("dwikuntobayu" + ':' + "12345678");
-  var base_url = 'http://localhost:3003';
+  var base_url = 'http://localhost:3003/';
 
-  return $resource('', {}, {
-    'index' : {
-      method : 'GET',
-      url : base_url + '/api/v1/bycycles',
-      isArray : false,
-      headers : {
-        'Authorization' : 'Basic ' + auth,
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json; charset=UTF-8',
-        'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'
-      }
-    },
-    'show' : {
-      method : 'GET',
-      url : base_url + '/api/v1/bycycles/:id',
-      isArray : false,
-      headers : {
-        'Authorization' : 'Basic ' + auth,
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json; charset=UTF-8',
-        'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'
-      },
-      params : {
-        id : '@id'
-      }
-    },
-    'save' : {
-      method : 'POST',
-      url : base_url + '/api/v1/bycycles',
-      isArray : false,
-      headers : {
-        'Authorization' : 'Basic ' + auth,
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json; charset=UTF-8',
-        'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'
-      },
-      params : {
-        name : '@name',
-        series : '@series'
-      }
-    },
-    'update' : {
-      method : 'PUT',
-      url : base_url + '/api/v1/bycycles/:id',
+  function resRequest(methodType, subDomain) {
+    return {
+      method : methodType,
+      url : base_url + subDomain,
       isArray : false,
       headers : {
         'Authorization' : 'Basic ' + auth,
@@ -81,24 +45,19 @@ app.factory('Bycycle', function($resource) {
         name : '@name',
         series : '@series'
       }
-    },
-    'destroy' : {
-      method : 'DELETE',
-      url : base_url + '/api/v1/bycycles/:id',
-      isArray : false,
-      headers : {
-        'Authorization' : 'Basic ' + auth,
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json; charset=UTF-8',
-        'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'
-      },
-      params : {
-        id : '@id'
-      }
-    }
+    };
+  }
+
+  return $resource('', {}, {
+    'index' : resRequest('GET', 'api/v1/bycycles'),
+    'show' : resRequest('GET', 'api/v1/bycycles/:id'),
+    'save' : resRequest('POST', 'api/v1/bycycles'),
+    'update' : resRequest('PUT', 'api/v1/bycycles/:id'),
+    'destroy' : resRequest('DELETE', 'api/v1/bycycles/:id'),
   });
 });
 
+//// create controller that injected services
 var app_bycycle = angular.module('bycycle_module', ['module_crudapi']);
 app_bycycle.controller('bycycle_controller', function($scope, Bycycle) {
   $scope.bycycle = {};
@@ -130,14 +89,6 @@ app_bycycle.controller('bycycle_controller', function($scope, Bycycle) {
     $scope.bycycles = Bycycle.destroy({
       id : $scope.bycycle.id
     });
-    // // this will catch error
-    // // but error will happend first then this handle will called
-    //.$promise.then(function(data) {
-    // // success handler
-    // }, function(error) {
-    // // error handler
-    // console.log(error);
-    // });
   };
   // $scope.bycycles = Bycycle.save({name: "Recon 1", series: "xc-rc1"});
   // $scope.bycycles = Bycycle.index();
@@ -146,16 +97,19 @@ app_bycycle.controller('bycycle_controller', function($scope, Bycycle) {
   // $scope.bycycles = Bycycle.destroy({id: 1});
 });
 
+////==========================================
+//// Access API data with http method
+////==========================================
 var http_module = angular.module('httpExample', []);
 http_module.controller('httpBycycle', function($scope, $http) {
   var auth = window.btoa("dwikuntobayu" + ':' + "12345678");
-  var base_url = 'http://localhost:3003';
+  var base_url = 'http://localhost:3003/';
   $scope.bycycle = {};
 
   function httpRequest(methodType, subDomain, inputData) {
     return {
     method: methodType,
-    url: 'http://localhost:3003/' + subDomain,
+    url: base_url + subDomain,
       headers: {
         'Authorization' : 'Basic ' + auth,
         'Accept' : 'application/json',
