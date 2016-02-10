@@ -124,7 +124,7 @@ app_bycycle.controller('bycycle_controller', function($scope, Bycycle) {
     });
   };
   $scope.delete_bycycle = function() {
-    if($scope.bycycle.id == null) {
+    if ($scope.bycycle.id == null) {
       $scope.bycycle.id = 0;
     }
     $scope.bycycles = Bycycle.destroy({
@@ -146,14 +146,34 @@ app_bycycle.controller('bycycle_controller', function($scope, Bycycle) {
   // $scope.bycycles = Bycycle.destroy({id: 1});
 });
 
-// angular.module('bycyclesExample', []).controller(function($scope, $http) {
-// $http.get('http://localhost:3003/api/v1/bycycles').success(function(data) {
-// $scope.bycycles = data;
-// });
-// $scope.save = function(bycycle) {
-// $http.update('http://localhost:3003/api/v1/bycycles' + bycycle.id, bycycle);
-// };
-// $scope.destroy = function(bycycle) {
-// $http.destroy('http://localhost:3003/api/v1/bycycles' + bycycle.id);
-// };
-// }); 
+var http_module = angular.module('httpExample', []);
+http_module.controller('httpBycycle', function($scope, $http) {
+  var auth = window.btoa("dwikuntobayu" + ':' + "12345678");
+  var base_url = 'http://localhost:3003';
+  $scope.bycycle = {};
+  $scope.index = function() {
+    $http.get('http://localhost:3003/api/v1/bycycles').success(function(data) {
+      $scope.bycycles = data;
+    });
+  };
+  $scope.show = function() {
+    $http.get('http://localhost:3003/api/v1/bycycles/' + $scope.bycycle.id).success(function(data) {
+      $scope.bycycles = data;
+    });
+  };
+  $scope.save = function() {
+    $http.post('http://localhost:3003/api/v1/bycycles', $scope.bycycle).success(function(data) {
+      $scope.bycycles = data;
+    });
+  };
+  $scope.update = function() {
+    $http.put('http://localhost:3003/api/v1/bycycles/' + $scope.bycycle.id, $scope.bycycle).success(function(data) {
+      $scope.bycycles = data;
+    });
+  };
+  $scope.delete = function() {
+    $http.delete('http://localhost:3003/api/v1/bycycles/' + $scope.bycycle.id).success(function(data) {
+      $scope.bycycles = data;
+    });
+  };
+}); 

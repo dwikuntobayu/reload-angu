@@ -9,7 +9,7 @@
   <!-- ng-app , is used for load custom module (implement angular code) -->
   <!-- ng-app needed if will use ng-controller -->
   <body >
-    <div ng-app="bycycle_module">
+    <!-- <div ng-app="bycycle_module">
       <div ng-controller="bycycle_controller">
         <div>
           <ul>
@@ -24,6 +24,43 @@
               <input name="name" placeholder="Name"  ng-model="bycycle.name" /> &nbsp; <input name="series" placeholder="Series" ng-model="bycycle.series" />
             </li>
             <li><span ng-click="delete_bycycle()">Delete Bycycle</span> <input name="id" placeholder="Id Bycycle" ng-model="bycycle.id" /></li>
+          </ul>
+        </div>
+        <div>{{ bycycles.message }}</div>
+        <div>Name : {{ bycycles.bycycles.name }} &nbsp; Series : {{ bycycles.bycycles.series }}</div>
+        <table>
+        <thead>
+          <tr>
+            <th width="50px">ID</th>
+            <th width="150px">Name</th>
+            <th width="150px">Series</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center;">
+          <tr ng-repeat="bycycle in bycycles.bycycles">
+            <td>{{ bycycle.id }}</td>
+            <td>{{ bycycle.name }}</td>
+            <td>{{ bycycle.series }}</td>
+          </tr>
+        </tbody>
+      </div>
+      </table>
+    </div> -->
+    <div ng-app="httpExample">
+      <div ng-controller="httpBycycle">
+        <div>
+          <ul>
+            <li><span ng-click="index()">List Bycycles</span></li>
+            <li><span ng-click="show()">Show Bycycle</span> <input name="id" placeholder="Id Bycycle" ng-model="bycycle.id" /></li>
+            <li>
+              <span ng-click="save()">Create Bycycle : </span>
+              <input name="name" placeholder="Name" ng-model="bycycle.name" /> &nbsp; <input name="series" placeholder="Series" ng-model="bycycle.series" />
+            </li>
+            <li>
+              <span ng-click="update()">Update Bycycles</span><input name="id" placeholder="Id Bycycle" ng-model="bycycle.id" /> <br />
+              <input name="name" placeholder="Name" ng-model="bycycle.name" /> &nbsp; <input name="series" placeholder="Series" ng-model="bycycle.series" />
+            </li>
+            <li><span ng-click="delete()">Delete Bycycle</span> <input name="id" placeholder="Id Bycycle" ng-model="bycycle.id" /></li>
           </ul>
         </div>
         <div>{{ bycycles.message }}</div>
