@@ -42,13 +42,12 @@ moduleCtrl.controller('myCtrl', function($scope, cstService) {
       return true;
     }
   }
-
 });
 
 var moduleSrvcs = angular.module('app.services', []);
 moduleSrvcs.factory('cstService', function() {
-  function hero() {
-    this.name;
+  function hero(baseName) {
+    this.name = baseName;
     this.blood = 200;
     this.setName = function(name) {
       this.name = name;
@@ -65,3 +64,4 @@ moduleSrvcs.factory('cstService', function() {
   };
   return hero;
 });
+
