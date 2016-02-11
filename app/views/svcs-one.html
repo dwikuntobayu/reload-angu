@@ -6,9 +6,22 @@
     <script src="../../src/js/angular-v1.5.0-rc2/angular-route.js" type="text/javascript"></script>
   </head>
   <body>
-    <h3>Me From Page Svcs One</h3>
-    
-    
+    <section ng-app="app">
+      <div ng-controller="myCtrl">
+        <h3>Player One</h3>
+        Name : <span ng-bind="player_one.name"></span>
+        <br />
+        Current Blood : <span ng-bind="player_one.blood"></span>
+        <br />
+        <h3>Player Two</h3>
+        Name : <span ng-bind="player_two.name"></span>
+        <br />
+        Current Blood : <span ng-bind="player_two.blood"></span>
+        <br />
+        <p>=============Battle Arena===========</p>
+        Who attacker : <input ng-model="target" />&nbsp;<span ng-click="attack()">Let's Go</span>
+      </div>
+    </section>
     
     <script src="../controllers/module_svcsroute.js" type="text/javascript"></script>
   </body>
