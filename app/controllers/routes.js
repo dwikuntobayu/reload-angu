@@ -22,12 +22,13 @@ moduleRoutes.config(function($routeProvider, $locationProvider) {
   .when('/', {
     templateUrl: 'index.html'
   })
+  //// make sure add '/' at first route name and templateUrl
   .when('/svcs-two', {
-    templateUrl: 'svcs-two.html',
+    templateUrl: '/svcs-two.html',
     controller: 'ctrlSvcsTwo'
   })
   .when('/svcsthree/:id', {
-    templateUrl: 'svcs-three.html',
+    templateUrl: '/svcs-three.html',
     controller: 'ctrlSvcsThree'
   });
   // .otherwise({redirectTo: '/'});
