@@ -4,6 +4,8 @@
     <title>Angular Reload</title>
     <script src="../../src/js/angular-v1.5.0-rc2/angular.js" type="text/javascript"></script>
     <script src="../../src/js/angular-v1.5.0-rc2/angular-route.js" type="text/javascript"></script>
+    <script src="../../src/js/angular-v1.5.0-rc2/angular-cookies.js" type="text/javascript"></script>
+    <script src="../../src/js/ngStorage.min.js" type="text/javascript"></script>
   </head>
   <body>
     <!-- <section ng-app="app">
@@ -20,6 +22,9 @@
         <br />
         <p>=============Battle Arena===========</p>
         Who attacker : <input ng-model="target" />&nbsp;<span ng-click="attack()">Let's Go</span>
+      <p ng-bind="storage.username"></p>
+      <p ng-bind="storage.age"></p>
+      <p ng-bind="cart.items"></p>
       </div>
     </section> -->
     <section ng-app="modroutes">
@@ -37,6 +42,7 @@
         <pre>$route.current.params = {{$route.current.params}}</pre>
         <pre>$route.current.scope.name = {{$route.current.scope.name}}</pre>
         <pre>$routeParams = {{$routeParams}}</pre>
+        <p ng-bind="storage.username"></p>
       </div>
     </section>
     <script src="../controllers/routes.js" type="text/javascript"></script>

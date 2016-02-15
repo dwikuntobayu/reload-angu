@@ -1,7 +1,7 @@
 angular.module('app', ['app.services', 'app.controllers']);
 
-var moduleCtrl = angular.module('app.controllers', []);
-moduleCtrl.controller('myCtrl', function($scope, cstService) {
+var moduleCtrl = angular.module('app.controllers', ['ngCookies', 'ngStorage']);
+moduleCtrl.controller('myCtrl', function($scope, cstService, $cookies, $localStorage, $sessionStorage) {
   $scope.player_one = {};
   $scope.player_two = {};
   var player_one = new cstService();
@@ -12,6 +12,22 @@ moduleCtrl.controller('myCtrl', function($scope, cstService) {
   $scope.player_two.name = player_two.getName();
   $scope.player_one.blood = player_one.getBlood();
   $scope.player_two.blood = player_two.getBlood();
+  
+  ////using cookies
+  var now = new Date();
+  var expireDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 2, now.getMinutes());
+  $cookies.put('token', '234lkj2l3498sfkj345hkjhfwr', {'expires': expireDate});
+
+  ////using local storage
+  $scope.storage = $localStorage.$default({
+    username: "Dwikuntobayu",
+    age: 17
+  });
+  // $localStorage.username = "Hayu A";
+  // $scope.username = $localStorage.username; 
+  $scope.cart = $sessionStorage.$default({
+    items: 'ku'
+  });
 
   $scope.attack = function() {
     var result;

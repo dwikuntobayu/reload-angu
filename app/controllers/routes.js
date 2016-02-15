@@ -1,5 +1,5 @@
 //// Setup routes for hande redirect and reload page
-var moduleRoutes = angular.module('modroutes', ['ngRoute']);
+var moduleRoutes = angular.module('modroutes', ['ngRoute', 'ngCookies', 'ngStorage']);
 
 moduleRoutes.controller('ctrlMain', function($scope, $route, $routeParams, $location){
   $scope.$route = $route;
@@ -7,14 +7,19 @@ moduleRoutes.controller('ctrlMain', function($scope, $route, $routeParams, $loca
   $scope.$routeParams = $routeParams;
 });
 
-moduleRoutes.controller('ctrlSvcsTwo', function($scope, $routeParams) {
+moduleRoutes.controller('ctrlSvcsTwo', function($scope, $routeParams, $cookies, $localStorage, $sessionStorage) {
   $scope.name = "Me from controller ctrlSvcsTwo";
   $scope.params = $routeParams;
+  $scope.token = $cookies.get('token');
+  $scope.storage = $localStorage;
 });
 
-moduleRoutes.controller('ctrlSvcsThree', function($scope, $routeParams) {
+moduleRoutes.controller('ctrlSvcsThree', function($scope, $routeParams, $cookies, $localStorage, $sessionStorage) {
   $scope.name = "Me from controller ctrlSvcsThree";
   $scope.params = $routeParams;
+  $cookies.remove('token');
+  $localStorage.$reset();
+  $sessionStorage.$reset();
 });
 
 moduleRoutes.config(function($routeProvider, $locationProvider) {
